@@ -42,7 +42,7 @@ export default function Index() {
                     type="text"
                   />
                 </label>
-                <button className="p-4 bg-gradient-to-r from-yellow-400 via-red-500 to-pink-500 rounded-r">
+                <button className="p-4 bg-gradient-to-r from-pink-700  to-yellow-600 rounded-r">
                   Search
                 </button>
               </div>
