@@ -89,7 +89,7 @@ function Layout({ children }: LayoutProps) {
             <ul className="flex text-white capitalize ">
               <li className="mr-4">
                 <Link
-                  className="bg-gradient-to-r from-yellow-400 via-red-500 to-pink-500 px-4 py-2 rounded-full"
+                  className="bg-gradient-to-r from-pink-700  to-yellow-600 px-4 py-2 rounded-full"
                   to=""
                 >
                   podcasts
@@ -97,7 +97,7 @@ function Layout({ children }: LayoutProps) {
               </li>
               <li>
                 <Link
-                  className="bg-gradient-to-r from-yellow-400 via-red-500 to-pink-500 px-4 py-2 rounded-full"
+                  className="bg-gradient-to-r from-pink-700  to-yellow-600 px-4 py-2 rounded-full"
                   to=""
                 >
                   genre
