@@ -27,7 +27,11 @@ export default function Index() {
         <div className="col-span-1 flex items-center text-white">
           <div>
             <h1 className="text-6xl  font-bold tracking-tighter">
-              Best podcasts for curious minds
+              Best{' '}
+              <span className="gradient_text bg-gradient-to-r from-red-900 to-blue-600">
+                podcasts
+              </span>{' '}
+              for curious minds
             </h1>
             <h2 className="mt-8">
               Our pick of the best podcasts on Spotify, Apple Podcasts
@@ -42,7 +46,7 @@ export default function Index() {
                     type="text"
                   />
                 </label>
-                <button className="p-4 bg-gradient-to-r from-pink-700  to-yellow-600 rounded-r">
+                <button className="p-4 bg-gradient-to-r from-red-900 to-blue-600 rounded-r">
                   Search
                 </button>
               </div>
@@ -51,8 +55,8 @@ export default function Index() {
         </div>
         <div className="col-span-1 flex justify-center overflow-hidden ">
           <img
-            className=" xl:max-w-xl transform rotate-45 md:-mr-28 xl:-mr-44"
-            src="/mic-front-premium.png"
+            className=" xl:max-w-xl transform rotate-45 md:-mr-28 xl:-mr-20"
+            src="/headphone-front-gradient.png"
           />
         </div>
       </div>
