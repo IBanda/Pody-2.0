@@ -12,6 +12,8 @@ import {
 } from 'remix';
 import type { LinksFunction } from 'remix';
 import styles from './tailwind.css';
+import customStyles from './styles/custom.css';
+import Player from './components/Player';
 
 /**
  * The `links` export is a function that returns an array of objects that map to
@@ -26,6 +28,10 @@ export const links: LinksFunction = () => {
     {
       rel: 'stylesheet',
       href: styles,
+    },
+    {
+      rel: 'stylesheet',
+      href: customStyles,
     },
   ];
 };
@@ -53,7 +59,7 @@ function Document({
   title?: string;
 }) {
   return (
-    <html lang="en">
+    <html lang="en" className="min-h-full">
       <head>
         <meta charSet="utf-8" />
         <meta
@@ -64,7 +70,7 @@ function Document({
         <Meta />
         <Links />
       </head>
-      <body>
+      <body className="min-h-full">
         {children}
         <RouteChangeAnnouncement />
         <ScrollRestoration />
@@ -81,15 +87,23 @@ type LayoutProps = {
 
 function Layout({ children }: LayoutProps) {
   return (
-    <div style={{ backgroundColor: '#191A19' }}>
-      <div className="container">
+    <div
+      style={{ backgroundColor: '#191A19' }}
+      className="flex flex-col min-h-full"
+    >
+      <div className="container flex-grow flex-shrink-0">
         <header className="flex items-center justify-between">
-          <img className="w-24 -ml-6" src="/mic-front-color.png" />
+          <Link to="/">
+            <img
+              className="w-24 -ml-6"
+              src="/mic-front-gradient.png"
+            />
+          </Link>
           <nav>
             <ul className="flex text-white capitalize ">
               <li className="mr-4">
                 <Link
-                  className="bg-gradient-to-r from-pink-700  to-yellow-600 px-4 py-2 rounded-full"
+                  className="bg-gradient-to-r from-red-900 to-blue-600 px-4 py-2 rounded-full"
                   to=""
                 >
                   podcasts
@@ -97,7 +111,7 @@ function Layout({ children }: LayoutProps) {
               </li>
               <li>
                 <Link
-                  className="bg-gradient-to-r from-pink-700  to-yellow-600 px-4 py-2 rounded-full"
+                  className="bg-gradient-to-r from-red-900 to-blue-600 px-4 py-2 rounded-full"
                   to=""
                 >
                   genre
@@ -107,8 +121,11 @@ function Layout({ children }: LayoutProps) {
           </nav>
         </header>
         <main>{children}</main>
+        <div>
+          <Player src="https://www.listennotes.com/e/p/6b6d65930c5a4f71b254465871fed370/" />
+        </div>
       </div>
-      <footer className="text-white p-4 mt-16 text-center bg-gradient-to-r from-yellow-400 via-red-500 to-pink-500">
+      <footer className="text-white p-4 mt-16 text-center bg-gradient-to-r from-red-900 to-blue-600 flex-shrink-0">
         <span>&#169;</span> Pody {new Date().getFullYear()}
       </footer>
     </div>
