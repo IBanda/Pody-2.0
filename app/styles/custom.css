@@ -1,0 +1,22 @@
+.podcast_link {
+  display: none;
+}
+
+.podcast_card:hover .podcast_link {
+  display: flex;
+}
+
+.episode_save {
+  display: none;
+}
+
+.episode_item:hover .episode_save {
+  display: flex;
+}
+
+.gradient_text {
+  -webkit-text-fill-color: transparent !important;
+  -webkit-background-clip: text;
+  background-clip: text;
+  padding: 2px;
+}
