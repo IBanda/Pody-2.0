@@ -1,29 +1,30 @@
-import { Form, MetaFunction, useLoaderData } from 'remix';
+import { Link, MetaFunction, useLoaderData } from 'remix';
 import type { LoaderFunction } from 'remix';
-import { client } from '~/api/client';
+import { client } from '~/api/client.server';
 import BestPodcasts from '~/components/BestPodcasts';
 import { FetchBestPodcastsPayload } from 'podcast-api';
+import SearchForm from '~/components/SearchForm';
 
 export const loader: LoaderFunction = async () => {
-  const response = await client.fetchBestPodcasts();
+  const response = await client.fetchBestPodcasts({
+    page: 1,
+  });
   const { data } = response;
   return data;
 };
 
-// https://remix.run/api/conventions#meta
 export const meta: MetaFunction = () => {
   return {
-    title: 'Remix Starter',
-    description: 'Welcome to remix!',
+    title: 'Pody',
+    description: 'Best podcasts for curious minds',
   };
 };
 
-// https://remix.run/guides/routing#index-routes
 export default function Index() {
-  const data = useLoaderData<FetchBestPodcastsPayload>();
+  const { podcasts } = useLoaderData<FetchBestPodcastsPayload>();
   return (
     <>
-      <div className="grid md:grid-cols-2 py-8">
+      <div className="grid md:grid-cols-2 pb-4">
         <div className="col-span-1 flex items-center text-white">
           <div>
             <h1 className="text-6xl  font-bold tracking-tighter">
@@ -38,29 +39,25 @@ export default function Index() {
               and more covering technology, culture, science, politics
               and new ideas
             </h2>
-            <Form>
-              <div className="">
-                <label>
-                  <input
-                    className="mt-4 text-black p-4  rounded-l "
-                    type="text"
-                  />
-                </label>
-                <button className="p-4 bg-gradient-to-r from-red-900 to-blue-600 rounded-r">
-                  Search
-                </button>
-              </div>
-            </Form>
+            <SearchForm />
           </div>
         </div>
         <div className="col-span-1 flex justify-center overflow-hidden ">
           <img
-            className=" xl:max-w-xl transform rotate-45 md:-mr-28 xl:-mr-20"
+            className=" xl:max-w-xl transform rotate-45 md:-mr-14 xl:-mr-20"
             src="/headphone-front-gradient.png"
           />
         </div>
       </div>
-      <BestPodcasts podcasts={data.podcasts} />
+      <BestPodcasts podcasts={podcasts} />
+      <div className="text-center mt-8">
+        <Link
+          to="/podcasts?page=2"
+          className="bg-gradient-to-r from-red-900 to-blue-600 text-white px-4 py-2 rounded-full"
+        >
+          More Podcasts
+        </Link>
+      </div>
     </>
   );
 }
