@@ -1,23 +1,38 @@
-import { useRef, useState } from 'react';
-import Slider from '@mui/material/Slider';
-type Props = {
-  src: string;
-};
+import { SyntheticEvent, useEffect, useRef, useState } from 'react';
+import { Slider } from '@mui/material';
+import { usePlayer } from './PlayerContext';
 
-export default function PlayerInternals({ src }: Props) {
+export default function PlayerInternals() {
   const [playing, setPlaying] = useState(false);
   const [duration, setDuration] = useState(0);
   const [volume, setVolume] = useState(0.5);
   const [currentTime, setCurrentTime] = useState(0);
+  const [seeking, setSeeking] = useState(false);
+  const [loaded, setLoaded] = useState(false);
+  const {
+    playing: globalPlaying,
+    status,
+    play,
+    id,
+    title,
+  } = usePlayer();
 
   const mediaElement = useRef<HTMLMediaElement | null>(null);
 
+  useEffect(() => {
+    if (status === 'playing') mediaElement.current?.play();
+    if (status === 'paused') mediaElement.current?.pause();
+  }, [status, id]);
+
   const onPlay = () => {
+    if (!globalPlaying) return;
     mediaElement?.current?.play();
+    play((prev) => ({ ...prev, status: 'playing' }));
   };
 
   const pause = () => {
     mediaElement?.current?.pause();
+    play((prev) => ({ ...prev, status: 'paused' }));
   };
 
   const onPause = () => {
@@ -42,8 +57,9 @@ export default function PlayerInternals({ src }: Props) {
     }
   };
 
-  const onError = () => {
-    alert('Media failed to play');
+  const onError = (e: SyntheticEvent) => {
+    play((prev) => ({ ...prev, status: 'error', playing: '' }));
+    console.log(e);
   };
 
   const onTrackValueChange = (e: Event, value: number | number[]) => {
@@ -57,7 +73,6 @@ export default function PlayerInternals({ src }: Props) {
     e: Event,
     value: number | number[]
   ) => {
-    console.log(value);
     if (mediaElement.current && typeof value === 'number') {
       setVolume(value);
       mediaElement.current.volume = value;
@@ -65,7 +80,11 @@ export default function PlayerInternals({ src }: Props) {
   };
 
   const onSeeking = () => {
-    console.log('seeking');
+    setSeeking(true);
+  };
+
+  const onSeeked = () => {
+    setSeeking(false);
   };
 
   const onPlayOrPause = () => {
@@ -96,21 +115,37 @@ export default function PlayerInternals({ src }: Props) {
     setVolume(mediaElement?.current?.volume as number);
   };
 
+  const onLoadStart = () => {
+    setLoaded(false);
+  };
+
+  const onLoadedData = () => {
+    setLoaded(true);
+  };
+
   return (
     <div className="flex justify-center items-center text-white ">
       <audio
         className="hidden"
         ref={mediaElement}
-        src={src}
+        src={globalPlaying}
         onTimeUpdate={onTimeUpdate}
         onDurationChange={onDurationChange}
         onPlaying={onPlaying}
         onPause={onPause}
         onError={onError}
         onSeeking={onSeeking}
+        onSeeked={onSeeked}
         onVolumeChange={onVolumeChange}
+        onLoadStart={onLoadStart}
+        onLoadedData={onLoadedData}
       ></audio>
       <div className="w-72">
+        <div className="w-56   overflow-hidden mx-auto">
+          <p className="title text-xs text-white whitespace-nowrap ">
+            {title}
+          </p>
+        </div>
         <div>
           <div>
             <Slider
@@ -142,7 +177,12 @@ export default function PlayerInternals({ src }: Props) {
             />
           </button>
           <button
-            className="rounded-full w-12 h-12 flex items-center justify-center border border-white"
+            className={`${
+              (seeking || (!loaded && globalPlaying)) &&
+              status !== 'error'
+                ? 'animate-pulse'
+                : ''
+            } rounded-full w-12 h-12 flex items-center justify-center border border-white`}
             onClick={onPlayOrPause}
           >
             <img
