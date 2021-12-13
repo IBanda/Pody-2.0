@@ -14,6 +14,8 @@ import type { LinksFunction } from 'remix';
 import styles from './tailwind.css';
 import customStyles from './styles/custom.css';
 import Player from './components/Player';
+import { PlayerProvider } from './components/PlayerContext';
+import Nprogress from 'nprogress';
 
 /**
  * The `links` export is a function that returns an array of objects that map to
@@ -59,25 +61,27 @@ function Document({
   title?: string;
 }) {
   return (
-    <html lang="en" className="min-h-full">
-      <head>
-        <meta charSet="utf-8" />
-        <meta
-          name="viewport"
-          content="width=device-width,initial-scale=1"
-        />
-        {title ? <title>{title}</title> : null}
-        <Meta />
-        <Links />
-      </head>
-      <body className="min-h-full">
-        {children}
-        <RouteChangeAnnouncement />
-        <ScrollRestoration />
-        <Scripts />
-        {process.env.NODE_ENV === 'development' && <LiveReload />}
-      </body>
-    </html>
+    <PlayerProvider>
+      <html lang="en" className="h-full">
+        <head>
+          <meta charSet="utf-8" />
+          <meta
+            name="viewport"
+            content="width=device-width,initial-scale=1"
+          />
+          {title ? <title>{title}</title> : null}
+          <Meta />
+          <Links />
+        </head>
+        <body className="h-full">
+          {children}
+          <RouteChangeAnnouncement />
+          <ScrollRestoration />
+          <Scripts />
+          {process.env.NODE_ENV === 'development' && <LiveReload />}
+        </body>
+      </html>
+    </PlayerProvider>
   );
 }
 
@@ -101,28 +105,20 @@ function Layout({ children }: LayoutProps) {
           </Link>
           <nav>
             <ul className="flex text-white capitalize ">
-              <li className="mr-4">
-                <Link
-                  className="bg-gradient-to-r from-red-900 to-blue-600 px-4 py-2 rounded-full"
-                  to=""
-                >
-                  podcasts
-                </Link>
-              </li>
               <li>
                 <Link
                   className="bg-gradient-to-r from-red-900 to-blue-600 px-4 py-2 rounded-full"
-                  to=""
+                  to="/podcasts"
                 >
-                  genre
+                  podcasts
                 </Link>
               </li>
             </ul>
           </nav>
         </header>
-        <main>{children}</main>
+        <main className="mt-12">{children}</main>
         <div>
-          <Player src="https://www.listennotes.com/e/p/6b6d65930c5a4f71b254465871fed370/" />
+          <Player />
         </div>
       </div>
       <footer className="text-white p-4 mt-16 text-center bg-gradient-to-r from-red-900 to-blue-600 flex-shrink-0">
@@ -139,7 +135,7 @@ export function CatchBoundary() {
   switch (caught.status) {
     case 401:
       message = (
-        <p>
+        <p className="text-white text-2xl">
           Oops! Looks like you tried to visit a page that you do not
           have access to.
         </p>
@@ -147,7 +143,7 @@ export function CatchBoundary() {
       break;
     case 404:
       message = (
-        <p>
+        <p className="text-white text-2xl">
           Oops! Looks like you tried to visit a page that does not
           exist.
         </p>
@@ -161,10 +157,14 @@ export function CatchBoundary() {
   return (
     <Document title={`${caught.status} ${caught.statusText}`}>
       <Layout>
-        <h1>
-          {caught.status}: {caught.statusText}
-        </h1>
-        {message}
+        <div className="flex items-center justify-center flex-col h-full">
+          <div className=" gradient_text bg-gradient-to-r from-indigo-200 to-pink-600">
+            <h1 className="text-6xl font-bold uppercase">
+              {caught.status}: {caught.statusText}
+            </h1>
+          </div>
+          {message}
+        </div>
       </Layout>
     </Document>
   );
@@ -175,14 +175,17 @@ export function ErrorBoundary({ error }: { error: Error }) {
   return (
     <Document title="Error!">
       <Layout>
-        <div>
-          <h1>There was an error</h1>
-          <p>{error.message}</p>
-          <hr />
-          <p>
-            Hey, developer, you should replace this with what you want
-            your users to see.
-          </p>
+        <div className=" flex items-center justify-center">
+          <div className="p-8 rounded-md max-w-md bg-gradient-to-r from-red-600 to-blue-600 text-center">
+            <h1 className="text-white text-3xl font-bold tracking-tighter mb-4">
+              Something went wrong
+            </h1>
+            <p className="text-white text-xs mb-4">{error.message}</p>
+            <p className="text-white text-xs">
+              We are working to solve the problem as quickly as
+              possible. In the mean time try to refresh your browser.
+            </p>
+          </div>
         </div>
       </Layout>
     </Document>
@@ -210,10 +213,15 @@ const RouteChangeAnnouncement = React.memo(() => {
       return;
     }
 
+    Nprogress.start();
     const pageTitle =
       location.pathname === '/' ? 'Home page' : document.title;
     setInnerHtml(`Navigated to ${pageTitle}`);
   }, [location.pathname]);
+
+  React.useEffect(() => {
+    if (innerHtml) Nprogress.done();
+  }, [innerHtml, location.pathname]);
 
   // Render nothing on the server. The live region provides no value unless
   // scripts are loaded and the browser takes over normal routing.
