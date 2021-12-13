@@ -1,6 +1,6 @@
 import { Client } from 'podcast-api';
 
 export const client = Client({
-  // apiKey: process.env.API_KEY as string,
+  // apiKey: String(process.env.API_KEY),
   apiKey: null,
 });
