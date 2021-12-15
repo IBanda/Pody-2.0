@@ -21,6 +21,7 @@
     "@mui/material": "^5.2.3",
     "@remix-run/react": "^1.0.4",
     "@remix-run/serve": "^1.0.4",
+    "@remix-run/vercel": "^1.0.6",
     "framer-motion": "^5.4.1",
     "nprogress": "^0.2.0",
     "podcast-api": "^1.1.1",
