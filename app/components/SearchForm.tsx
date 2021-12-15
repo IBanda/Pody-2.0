@@ -16,7 +16,7 @@ export default function SearchForm({ value }: Props) {
             onChange={(e) => setQuery(e.target.value)}
             name="q"
             placeholder="Search podcasts"
-            className="mt-4 text-black p-4  rounded-l w-52 lg:w-72 "
+            className="mt-4 text-black p-4  rounded-l  w-48 sm:w-52 lg:w-72 "
             type="text"
           />
         </label>
