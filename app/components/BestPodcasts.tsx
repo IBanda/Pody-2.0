@@ -9,7 +9,7 @@ export default function BestPodcasts({ podcasts }: Props) {
   return (
     <section className="mt-8">
       <div className="flex items-center">
-        <h2 className="text-white font-bold text-5xl tracking-tighter mb-8">
+        <h2 className="text-white font-bold text-3xl md:text-5xl tracking-tighter mb-8">
           Best Podcasts
         </h2>
         <img
