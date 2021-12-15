@@ -25,9 +25,9 @@ export default function Index() {
   return (
     <>
       <div className="grid md:grid-cols-2 pb-4">
-        <div className="col-span-1 flex items-center text-white">
+        <div className="col-span-1 flex items-center text-white text-center md:text-left">
           <div>
-            <h1 className="text-6xl  font-bold tracking-tighter">
+            <h1 className="text-4xl md:text-6xl  font-bold tracking-tighter">
               Best{' '}
               <span className="gradient_text bg-gradient-to-r from-red-900 to-blue-600">
                 podcasts
@@ -42,7 +42,7 @@ export default function Index() {
             <SearchForm />
           </div>
         </div>
-        <div className="col-span-1 flex justify-center overflow-hidden ">
+        <div className="col-span-1 md:flex  hidden justify-center overflow-hidden  ">
           <img
             className=" xl:max-w-xl transform rotate-45 md:-mr-14 xl:-mr-20"
             src="/headphone-front-gradient.png"
