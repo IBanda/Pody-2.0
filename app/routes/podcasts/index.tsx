@@ -45,7 +45,7 @@ export default function Index() {
   const filter = useFilter();
 
   return (
-    <div className="grid grid-cols-4 gap-4">
+    <div className="grid md:grid-cols-4 gap-4">
       <div className="col-span-1">
         <Genres genres={fetchedGenres.genres} />
       </div>
