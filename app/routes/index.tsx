@@ -46,6 +46,7 @@ export default function Index() {
           <img
             className=" xl:max-w-xl transform rotate-45 md:-mr-14 xl:-mr-20"
             src="/headphone-front-gradient.png"
+            alt="headphone"
           />
         </div>
       </div>
