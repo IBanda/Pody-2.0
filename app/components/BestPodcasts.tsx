@@ -16,6 +16,8 @@ export default function BestPodcasts({ podcasts }: Props) {
           className="w-14 -mt-4 transform rotate-45"
           src="/trophy-front-gradient.png"
           alt="trophy"
+          width={80}
+          height={80}
         />
       </div>
       <PodcastList podcasts={podcasts} />

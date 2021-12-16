@@ -96,11 +96,13 @@ function Layout({ children }: LayoutProps) {
       className="flex flex-col min-h-full"
     >
       <div className="container flex-grow flex-shrink-0">
-        <header className="flex items-center justify-between">
+        <header className="flex items-center justify-between py-3">
           <Link to="/">
             <img
               className="w-24 -ml-6"
               src="/mic-front-gradient.png"
+              width={50}
+              height={50}
               alt="mic"
             />
           </Link>
