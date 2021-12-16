@@ -88,6 +88,8 @@ export default function Search() {
                         className="w-16 h-16 float-left mr-1 "
                         src={result.thumbnail}
                         alt={result.title_original}
+                        width={100}
+                        height={130}
                       />
                       <Link to={`/podcasts/${result.id}`}>
                         <div

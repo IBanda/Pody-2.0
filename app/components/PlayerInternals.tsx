@@ -174,6 +174,8 @@ export default function PlayerInternals() {
               className="w-6"
               src="/skip-15-seconds-back.png"
               alt="skip 15 seconds back"
+              width={30}
+              height={30}
             />
           </button>
           <button
@@ -193,6 +195,8 @@ export default function PlayerInternals() {
                   : '/play-front-clay.png'
               }`}
               alt="play"
+              width={30}
+              height={30}
             />
           </button>
           <button onClick={onSkipFowards}>
@@ -200,6 +204,8 @@ export default function PlayerInternals() {
               className="w-6 "
               src="/skip-ahead-15-seconds.png"
               alt="skip 15 seconds back"
+              width={30}
+              height={30}
             />
           </button>
         </div>
@@ -208,6 +214,8 @@ export default function PlayerInternals() {
             className="w-6"
             src="/low-volume.png"
             alt="volume down"
+            width={30}
+            height={30}
           />
           <Slider
             step={0.1}
@@ -222,6 +230,8 @@ export default function PlayerInternals() {
             className="w-6 ml-2"
             src="/high-volume.png"
             alt="volume up"
+            width={30}
+            height={30}
           />
         </div>
       </div>

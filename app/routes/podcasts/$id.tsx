@@ -133,6 +133,8 @@ export default function Podcast() {
                       : '/play-front-gradient.png'
                   }`}
                   alt="play"
+                  width={40}
+                  height={40}
                 />
               </button>
             </div>
@@ -150,6 +152,8 @@ export default function Podcast() {
           className="max-w-md w-full rounded-sm"
           src={podcast.image}
           alt={podcast.title}
+          width={350}
+          height={400}
         />
         <motion.span className="text-xs ">
           Publisher: {podcast.publisher}
