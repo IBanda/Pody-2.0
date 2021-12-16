@@ -60,7 +60,7 @@ export default function Podcast() {
     !next_episode_pub_date || index < episodes.length;
 
   const loadMoreItems =
-    status === 'loading'
+    status === 'loading' || !next_episode_pub_date
       ? // eslint-disable-next-line @typescript-eslint/no-empty-function
         () => {}
       : async () => {
@@ -174,9 +174,8 @@ export default function Podcast() {
             <List
               itemCount={itemCount}
               height={500}
-              itemSize={50}
+              itemSize={70}
               width={'100%'}
-              className="p-2"
               ref={ref}
               onItemsRendered={onItemsRendered}
             >
