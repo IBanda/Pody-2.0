@@ -101,6 +101,7 @@ function Layout({ children }: LayoutProps) {
             <img
               className="w-24 -ml-6"
               src="/mic-front-gradient.png"
+              alt="mic"
             />
           </Link>
           <nav>
@@ -171,7 +172,6 @@ export function CatchBoundary() {
 }
 
 export function ErrorBoundary({ error }: { error: Error }) {
-  console.error(error);
   return (
     <Document title="Error!">
       <Layout>
