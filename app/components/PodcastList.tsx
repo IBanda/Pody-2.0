@@ -47,6 +47,8 @@ export default function PodcastList({ podcasts }: Props) {
                 className="w-8 h-8"
                 src="/link-front-clay.png"
                 alt="link"
+                width={30}
+                height={30}
               />
             </Link>
             <motion.h3 className="text-white mt-4 tracking-tighter lg:truncate">

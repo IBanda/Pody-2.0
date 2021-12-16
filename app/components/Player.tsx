@@ -27,6 +27,8 @@ export default function Player() {
           className="w-8"
           src="/headphone-front-clay.png"
           alt="headphone"
+          width={40}
+          height={40}
         />
       </button>
 
