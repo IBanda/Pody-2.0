@@ -18,7 +18,7 @@ export default function PodcastList({ podcasts }: Props) {
     >
       {podcasts.map((podcast) => (
         <motion.li key={podcast.id} variants={item}>
-          <Link to={`/podcasts/${podcast.id}`}>
+          <Link to={`/podcasts/${podcast.id}`} prefetch="intent">
             <motion.div
               tabIndex={0}
               className="relative podcast_card p-3 bg-gray-700 rounded-lg bg-opacity-10 shadow-lg cursor-pointer "
