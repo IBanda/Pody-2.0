@@ -31,7 +31,6 @@ export const loader: LoaderFunction = async ({ request }) => {
     };
   }
 
-  // invariant(params.q, 'A query string is required');
   const response = await client.search({
     q: params.q,
     type: 'podcast',
