@@ -11,6 +11,5 @@ export default function useFilter() {
     params.set(param, String(value));
     navigate(`${location.pathname}?${params.toString()}`);
   }
-
   return filter;
 }
