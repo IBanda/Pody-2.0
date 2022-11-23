@@ -37,10 +37,12 @@ export default function PlayerInternals() {
 
   const onPause = () => {
     setPlaying(false);
+    play((prev) => ({ ...prev, status: 'paused' }));
   };
 
   const onPlaying = () => {
     setPlaying(true);
+    play((prev) => ({ ...prev, status: 'playing' }));
   };
 
   const onDurationChange = () => {
