@@ -45,7 +45,7 @@ export default function Index() {
         <div className="col-span-1 md:flex  hidden justify-center overflow-hidden  ">
           <img
             className=" xl:max-w-xl transform rotate-45 md:-mr-14 xl:-mr-20"
-            src="/headphone-front-gradient.png"
+            src="/headphone-front-gradient.webp"
             alt="headphone"
             width={600}
             height={500}

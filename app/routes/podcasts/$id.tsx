@@ -129,8 +129,8 @@ export default function Podcast() {
                   className="w-8 "
                   src={`${
                     status === 'playing' && id === episode.id
-                      ? '/pause-front-gradient.png'
-                      : '/play-front-gradient.png'
+                      ? '/pause-front-gradient.webp'
+                      : '/play-front-gradient.webp'
                   }`}
                   alt="play"
                   width={40}

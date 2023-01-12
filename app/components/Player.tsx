@@ -25,7 +25,7 @@ export default function Player() {
       >
         <img
           className="w-8"
-          src="/headphone-front-clay.png"
+          src="/headphone-front-clay.webp"
           alt="headphone"
           width={40}
           height={40}
