@@ -1,11 +1,11 @@
-// import { Episode } from 'podcast-api';
+import { Episode } from 'podcast-api';
 import React, { createContext, useContext, useState } from 'react';
 
 interface Context {
   title: string;
   id: string;
   playing: string;
-  //   playlist: Episode[];
+  playlist: Episode[];
   status: 'playing' | 'paused' | 'error';
 }
 
@@ -26,6 +26,7 @@ export function PlayerProvider({ children }: Props) {
     id: '',
     playing: '',
     title: '',
+    playlist: [],
     status: 'paused',
   });
 

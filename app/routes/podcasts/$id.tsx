@@ -17,7 +17,7 @@ export const loader: LoaderFunction = async ({ params, request }) => {
   invariant(params.id, 'ID expected');
   const response = await client.fetchPodcastById({
     id: params.id,
-    sort: 'recent_first',
+    sort: 'oldest_first',
     ...(nextEpisodePubDate
       ? { next_episode_pub_date: Number(nextEpisodePubDate) }
       : null),
@@ -102,6 +102,7 @@ export default function Podcast() {
           id: episode.id,
           title: episode.title,
           playing: episode.audio,
+          playlist: episodes,
           status: 'playing',
         });
       } else {

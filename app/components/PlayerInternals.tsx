@@ -15,6 +15,7 @@ export default function PlayerInternals() {
     play,
     id,
     title,
+    playlist,
   } = usePlayer();
 
   const mediaElement = useRef<HTMLMediaElement | null>(null);
@@ -125,6 +126,20 @@ export default function PlayerInternals() {
     setLoaded(true);
   };
 
+  const onEnded = () => {
+    const pos = playlist.findIndex((item) => item.id === id);
+    const nextEp = playlist[pos + 1];
+    if (pos < playlist.length - 1) {
+      play((prev) => ({
+        ...prev,
+        id: nextEp.id,
+        title: nextEp.title,
+        playing: nextEp.audio,
+        status: 'playing',
+      }));
+    }
+  };
+
   return (
     <div className="flex justify-center items-center text-white ">
       <audio
@@ -141,6 +156,7 @@ export default function PlayerInternals() {
         onVolumeChange={onVolumeChange}
         onLoadStart={onLoadStart}
         onLoadedData={onLoadedData}
+        onEnded={onEnded}
       ></audio>
       <div className="w-72">
         <div className="w-56   overflow-hidden mx-auto">
