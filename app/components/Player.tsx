@@ -35,7 +35,7 @@ export default function Player() {
       <div
         tabIndex={0}
         ref={ref}
-        className={` bg-gradient-to-r from-red-900 to-blue-600 py-4 px-2  w-full fixed z-20 bottom-0 left-0 shadow-lg transition transform-gpu duration-200 delay-75 ${
+        className={` bg-pink-800 py-4 px-2  w-full fixed z-20 bottom-0 left-0 shadow-lg transition transform-gpu duration-200 delay-75 ${
           isVisible ? 'translate-x-0' : 'translate-x-full'
         }`}
         onBlur={onBlur}
