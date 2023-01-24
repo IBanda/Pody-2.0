@@ -14,6 +14,7 @@ export const loader: LoaderFunction = async ({ params }) => {
   const response = await client.fetchPodcastById({
     id,
     next_episode_pub_date: +next_episode_pub_date,
+    sort: 'oldest_first',
   });
   const { data } = response;
   return data;

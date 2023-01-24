@@ -117,7 +117,7 @@ export default function Podcast() {
       <div
         style={{ ...style, marginBottom: 10 }}
         className={`cursor-pointer episode_item relative flex items-center  p-2 bg-opacity-10 mb-4 ${
-          (index + 1) % 2 === 0 ? 'bg-gray-700' : 'bg-black'
+          (index + 1) % 2 === 0 ? 'bg-indigo-700' : 'bg-black'
         }`}
       >
         {!isItemLoaded(index) ? (
