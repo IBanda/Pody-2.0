@@ -11,7 +11,7 @@ type Props = {
 export default function PodcastList({ podcasts }: Props) {
   return (
     <motion.ul
-      className="grid md:grid-cols-2 lg:grid-cols-4 gap-4"
+      className="grid grid-cols-2 md:grid-cols-3 lg:grid-cols-4 gap-4"
       variants={container}
       initial="hidden"
       animate="visible"
@@ -41,7 +41,7 @@ export default function PodcastList({ podcasts }: Props) {
                 />
               </div>
 
-              <motion.h3 className="text-white mt-4 tracking-tighter lg:truncate">
+              <motion.h3 className="text-xs md:text-base text-white mt-4 tracking-tighter lg:truncate">
                 {podcast.title}
               </motion.h3>
             </motion.div>
